@@ -17,6 +17,7 @@ export const Home = (): JSX.Element => (
         Get started by editing <code>pages/index.tsx</code>
       </p>
 
+      <input type="checkbox" className="appearance-none checked:bg-blue-600 checked:border-transparent" />
       <button
         onClick={() => {
           window.alert('With typescript and Jest');
