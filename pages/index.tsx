@@ -8,10 +8,25 @@ export const Home = (): JSX.Element => (
       <link rel='icon' href='/favicon.ico' />
     </Head>
 
-    <main>
+    <main className='bg-gray-100'>
       <h1 className='title'>
         Welcome to <a href='https://nextjs.org'>Next.js!</a>
       </h1>
+
+      <div className='w-full pb-4 px-4'>
+        <div className='relative bg-white rounded-xl mb-4 shadow-lg p-2'>
+          <div className='flex flex-row items-center'>
+            <input
+              type='checkbox'
+              className='h-6 w-6 rounded m-2 border-gray-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50 text-indigo-500'
+            />
+            <span className='font-semibold text-xl text-blueGray-700'>
+              買い物に行く
+            </span>
+            <button className='fas fa-ellipsis-v text-gray-500 absolute right-4 ' />
+          </div>
+        </div>
+      </div>
 
       <p className='description'>
         Get started by editing <code>pages/index.tsx</code>
