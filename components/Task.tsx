@@ -18,7 +18,7 @@ export interface TaskProps {
 const Task: React.FC<TaskProps> = (props) => {
   return (
     <React.Fragment>
-      <div className='flex flex-row items-center border-t border-gray-200 m-2'>
+      <div className='flex flex-row items-center border-t border-gray-200 mb-2'>
         <input
           type='checkbox'
           className='h-5 w-5 rounded m-2 border-gray-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50 text-indigo-500'

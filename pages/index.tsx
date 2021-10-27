@@ -9,7 +9,13 @@ export const Home = (): JSX.Element => (
     </Head>
 
     <main className='bg-gray-100 flex flex-col min-h-screen'>
-      <TaskCard tasks={[{ name: 'メール返信' }, { name: '議事録作成' }]} />
+      <TaskCard
+        tasks={[
+          { name: 'メール返信' },
+          { name: 'OSS申請' },
+          { name: 'SpringBootの環境構築' },
+        ]}
+      />
       <div>
         <form className='bg-white rounded-t-xl shadow-lg p-2 flex flex-row'>
           <input
