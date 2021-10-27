@@ -20,19 +20,13 @@ const TaskInputForm: React.FC<TaskInputFormProps> = () => {
 
   return (
     <React.Fragment>
-      <form className='bg-white rounded-t-xl shadow-lg p-2 flex flex-row'>
-        <input
-          className='appearance-none border rounded-l py-2 px-3 w-11/12 text-gray-700 border-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500'
-          id='taskTitle'
-          type='text'
-          placeholder='新しいタスクの名前'
-        />
+      <div className='flex justify-center shadow-2xl'>
         <button
-          className='fas fa-plus flex-grow-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline'
+          className='fas fa-plus rounded-full h-12 w-12 mb-2 bg-blue-500 text-white text-xl'
           type='button'
           onClick={() => setOpen(!isOpen)}
         />
-      </form>
+      </div>
 
       {/* Collapse */}
       <div
@@ -41,8 +35,8 @@ const TaskInputForm: React.FC<TaskInputFormProps> = () => {
         }`}
       >
         {/* Collapse header */}
-        <div className='block mb-4 border-b border-solid border-blueGray-200'>
-          <div className='flex flex-wrap'>
+        <div className='block mb-2'>
+          <div className='flex flex-row items-center'>
             <div className='w-6/12'>
               <span className='text-left text-gray-700 mr-0 inline-block whitespace-nowrap text-sm font-bold px-0'>
                 タスクを入力してみましょう
@@ -68,7 +62,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = () => {
             placeholder='新しいタスクの名前'
           />
           <button
-            className='fas fa-plus flex-grow-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline'
+            className='fas fa-arrow-circle-up flex-grow-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline'
             type='button'
           />
         </form>
