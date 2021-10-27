@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Task from '../components/Task';
 import TaskCard from '../components/TaskCard';
 
 export const Home = (): JSX.Element => (
@@ -10,12 +9,6 @@ export const Home = (): JSX.Element => (
     </Head>
 
     <main className='bg-gray-100 flex flex-col min-h-screen'>
-      <span>今日</span>
-      <div className='flex-grow pb-4 px-4'>
-        <Task name='買い物に行く！！！' />
-        <Task name='買い物に行く！！！' />
-        <Task name='買い物に行く！！！' />
-      </div>
       <TaskCard tasks={[{ name: 'メール返信' }, { name: '議事録作成' }]} />
       <div>
         <form className='bg-white rounded-t-xl shadow-lg p-2 flex flex-row'>
