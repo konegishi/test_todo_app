@@ -20,7 +20,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = () => {
 
   return (
     <React.Fragment>
-      <div className='flex justify-center shadow-2xl'>
+      <div className='flex justify-center shadow-2xl sticky bottom-0'>
         <button
           className='fas fa-plus rounded-full h-12 w-12 mb-2 bg-blue-500 text-white text-xl'
           type='button'
@@ -34,7 +34,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = () => {
           isOpen ? 'bg-white p-2' : 'hidden'
         }`}
       >
-        {/* Collapse header */}
+        {/* Collapse Footer */}
         <div className='block mb-2'>
           <div className='flex flex-row items-center'>
             <div className='w-6/12'>
@@ -53,7 +53,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = () => {
             </div>
           </div>
         </div>
-        {/* Navigation */}
+        {/* Form */}
         <form className='flex flex-row'>
           <input
             className='appearance-none border rounded-l py-2 px-3 w-11/12 text-gray-700 border-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500'
