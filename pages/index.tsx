@@ -43,7 +43,7 @@ const Home = (): JSX.Element => {
                 { name: 'SpringBootの環境構築' },
               ]}
             />
-            <TaskInputForm />
+            <TaskInputForm user={user} />
           </main>
         </div>
       )}
