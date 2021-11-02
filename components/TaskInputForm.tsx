@@ -102,12 +102,12 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
           <input
             className='appearance-none border rounded-l py-2 px-3 w-11/12 text-gray-700 border-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500'
             id='taskTitle'
-            value={newTaskText}
+            // value={newTaskText}
             type='text'
             placeholder='新しいタスクの名前'
-            onChange={(e) => {
+            onChange={(event) => {
               setError('');
-              setNewTaskText(e.target.value);
+              setNewTaskText(event.target.value);
             }}
           />
           <button
