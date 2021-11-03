@@ -34,9 +34,6 @@ const TaskCard: React.FC<TaskCardProps> = () => {
           {todos.map((todo) => {
             return <Task name={todo.task} key={todo.id} />;
           })}
-          {/* {props.tasks.map((task, index) => {
-            return <Task name={task.name} key={index} />;
-          })} */}
         </div>
       </div>
     </React.Fragment>

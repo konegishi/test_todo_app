@@ -1,7 +1,6 @@
 import { User } from '@supabase/supabase-js';
 import React, { useState } from 'react';
 import { useTodos } from '../hooks/useTodos';
-// import { supabase } from '../lib/supabase';
 
 /**
  * TaskInputFormのProps
@@ -22,50 +21,13 @@ interface TaskInputFormProps {
  */
 const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
   const [isOpen, setOpen] = useState(false);
-  // const [todos, setTodos] = useState([]);
   const [newTaskText, setNewTaskText] = useState('');
-  // const [errorText, setError] = useState('');
   const { todos, addTodo } = useTodos();
-  // const { todos, fetchTodos, addTodo } = useTodos();
 
   // eslint-disable-next-line no-console
   console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
   // eslint-disable-next-line no-console
   console.log(todos);
-
-  // useEffect(() => {
-  //   fetchTodos();
-  // }, []);
-
-  // const fetchTodos = async () => {
-  //   const { data: todos, error } = await supabase
-  //     .from('todos')
-  //     .select('*')
-  //     .order('id');
-  //   if (error) {
-  //     // eslint-disable-next-line no-console
-  //     console.log('error', error);
-  //     // eslint-disable-next-line no-console
-  //     console.log('errorText', errorText);
-  //   } else {
-  //     setTodos(todos);
-  //   }
-  // };
-
-  // const addTodo = async (taskText) => {
-  //   const task = taskText.trim();
-  //   if (task.length) {
-  //     const { data: todo, error } = await supabase
-  //       .from('todos')
-  //       .insert({ task, user_id: props.user.id })
-  //       .single();
-  //     if (error) {
-  //       setError(error.message);
-  //     } else {
-  //       setTodos([...todos, todo]);
-  //     }
-  //   }
-  // };
 
   return (
     <React.Fragment>

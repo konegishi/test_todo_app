@@ -4,7 +4,6 @@ import { supabase } from '../lib/supabase';
 
 export const useTodos = () => {
   const [todos, setTodos] = useState([]);
-  //   const [newTaskText, setNewTaskText] = useState('');
   const [errorText, setError] = useState('');
 
   const fetchTodos = async () => {
