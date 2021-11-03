@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import { User } from '@supabase/supabase-js';
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase';
 
 /**
  * TaskInputFormのProps
  */
 interface TaskInputFormProps {
+  /** ユーザー情報 */
+  user: User;
   /** タスク名 */
   name?: string;
 }
@@ -15,8 +19,48 @@ interface TaskInputFormProps {
  * @param props TaskInputFormのProps
  * @returns TaskInputFormコンポーネント
  */
-const TaskInputForm: React.FC<TaskInputFormProps> = () => {
+const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
   const [isOpen, setOpen] = useState(false);
+  const [todos, setTodos] = useState([]);
+  const [newTaskText, setNewTaskText] = useState('');
+  const [errorText, setError] = useState('');
+
+  // eslint-disable-next-line no-console
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
+  const fetchTodos = async () => {
+    const { data: todos, error } = await supabase
+      .from('todos')
+      .select('*')
+      .order('id');
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.log('error', error);
+      // eslint-disable-next-line no-console
+      console.log('errorText', errorText);
+    } else {
+      setTodos(todos);
+    }
+  };
+
+  const addTodo = async (taskText) => {
+    const task = taskText.trim();
+    if (task.length) {
+      const { data: todo, error } = await supabase
+        .from('todos')
+        .insert({ task, user_id: props.user.id })
+        .single();
+      if (error) {
+        setError(error.message);
+      } else {
+        setTodos([...todos, todo]);
+      }
+    }
+  };
 
   return (
     <React.Fragment>
@@ -58,12 +102,18 @@ const TaskInputForm: React.FC<TaskInputFormProps> = () => {
           <input
             className='appearance-none border rounded-l py-2 px-3 w-11/12 text-gray-700 border-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500'
             id='taskTitle'
+            // value={newTaskText}
             type='text'
             placeholder='新しいタスクの名前'
+            onChange={(event) => {
+              setError('');
+              setNewTaskText(event.target.value);
+            }}
           />
           <button
             className='fas fa-arrow-circle-up flex-grow-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline'
             type='button'
+            onClick={() => addTodo(newTaskText)}
           />
         </form>
       </div>
