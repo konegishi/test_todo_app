@@ -44,7 +44,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
         <div className='absolute w-full min-h-full'>
           <span
             id='blackOverlay'
-            className='absolute w-full min-h-full bg-black opacity-30'
+            className='absolute w-full min-h-full bg-gray-500 bg-opacity-75'
           ></span>
         </div>
         {/* タスク入力フォーム */}
