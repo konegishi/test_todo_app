@@ -32,7 +32,7 @@ const TaskCard: React.FC<TaskCardProps> = () => {
             今日
           </h2>
           {todos.map((todo) => {
-            return <Task name={todo.task} id={todo.id} key={todo.id} />;
+            return <Task title={todo.task} id={todo.id} key={todo.id} />;
           })}
         </div>
       </div>
