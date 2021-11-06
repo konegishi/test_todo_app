@@ -39,9 +39,15 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
 
   return (
     <React.Fragment>
-      <div className='flex justify-center shadow-2xl sticky bottom-0'>
+      <div
+        className={`flex justify-center shadow-2xl${
+          !isOpen && ' sticky bottom-0'
+        }`}
+      >
         <button
-          className='fas fa-plus rounded-full h-12 w-12 mb-2 bg-blue-500 text-white text-xl'
+          className={`fas fa-plus rounded-full h-12 w-12 mb-2 bg-blue-500 text-white text-xl${
+            isOpen && ' hidden'
+          }`}
           type='button'
           onClick={() => setOpen(!isOpen)}
         />
@@ -50,7 +56,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
       {/* Collapse */}
       <div
         className={`shadow absolute bottom-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded-t ${
-          isOpen ? 'bg-white p-2' : 'hidden'
+          isOpen ? 'bg-white p-2 sticky' : 'hidden'
         }`}
       >
         {/* Collapse Footer */}
@@ -58,7 +64,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
           <div className='flex flex-row items-center'>
             <div className='w-6/12'>
               <span className='text-left text-gray-700 mr-0 inline-block whitespace-nowrap text-sm font-bold px-0'>
-                タスクを入力してみましょう
+                新しいタスクを入力してみましょう
               </span>
             </div>
             <div className='w-6/12 flex justify-end'>
