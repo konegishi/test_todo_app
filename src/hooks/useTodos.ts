@@ -6,6 +6,9 @@ export const useTodos = () => {
   const [todos, setTodos] = useState([]);
   const [errorText, setError] = useState('');
 
+  /**
+   * supabaseからtodoデータをfetchする
+   */
   const fetchTodos = async () => {
     const { data: todos, error } = await supabase
       .from('todos')
@@ -21,6 +24,11 @@ export const useTodos = () => {
     }
   };
 
+  /**
+   * supabaseにtodoデータを追加する
+   * @param user
+   * @param taskText
+   */
   const addTodo = async (user: User, taskText: string) => {
     const task = taskText.trim();
     if (task.length) {
@@ -36,9 +44,24 @@ export const useTodos = () => {
     }
   };
 
+  /**
+   * supabaseからtodoを削除する
+   * @param id
+   */
+  const deleteTodo = async (id: number) => {
+    try {
+      await supabase.from('todos').delete().eq('id', id);
+      setTodos(todos.filter((x) => x.id != id));
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('error', error);
+    }
+  };
+
   return {
     todos,
     fetchTodos,
     addTodo,
+    deleteTodo,
   };
 };
