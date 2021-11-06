@@ -20,7 +20,7 @@ const Home = (): JSX.Element => {
         </div>
       ) : (
         <div>
-          <button
+          {/* <button
             className='btn-black w-full mt-12'
             onClick={async () => {
               const { error } = await supabase.auth.signOut();
@@ -29,13 +29,13 @@ const Home = (): JSX.Element => {
             }}
           >
             Logout
-          </button>
+          </button> */}
           <Head>
             <title>Create Next App</title>
             <link rel='icon' href='/favicon.ico' />
           </Head>
 
-          <main className='bg-gray-100 flex flex-col min-h-screen'>
+          <main className='absolute bg-gray-100 flex flex-col min-h-full w-full'>
             <TaskCard
               tasks={[
                 { name: 'メール返信' },
