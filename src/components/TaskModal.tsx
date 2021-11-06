@@ -1,3 +1,4 @@
+import { Auth } from '@supabase/ui';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useTodos } from '../hooks/useTodos';
 
@@ -9,6 +10,8 @@ export interface TaskModalProps {
   title: string;
   /** タスクのid */
   id: number;
+  /** タスクの説明 */
+  description: string;
   /** Modal開閉用メソッド */
   onClickHandler: Dispatch<SetStateAction<boolean>>;
 }
@@ -22,7 +25,10 @@ export interface TaskModalProps {
  */
 const TaskModal: React.FC<TaskModalProps> = (props) => {
   const [enableDelete, setEnableDelete] = useState(false);
-  const { deleteTodo } = useTodos();
+  const [taskTitle, setTaskTitle] = useState('');
+  const [taskDescription, setTaskDescription] = useState('');
+  const { deleteTodo, updateTodo } = useTodos();
+  const { user } = Auth.useUser();
 
   return (
     <React.Fragment>
@@ -70,24 +76,29 @@ const TaskModal: React.FC<TaskModalProps> = (props) => {
                   <input
                     className='appearance-none border rounded-l py-2 px-3 text-gray-700 border-gray-200 leading-tight mb-4'
                     id='taskTitle'
-                    value={props.title}
+                    value={taskTitle}
                     type='text'
                     placeholder={props.title}
-                    // onChange={(event) => {
-                    //   // setError('');
-                    //   setNewTaskText(event.target.value);
-                    // }}
+                    onChange={(event) => {
+                      setTaskTitle(event.target.value);
+                    }}
                   />
                   <span className='text-sm text-left'>説明</span>
                   <textarea
                     className='appearance-none border rounded-l py-2 px-3 text-gray-700 border-gray-200 leading-tight mb-4'
                     id='taskDescription'
-                    value={props.title}
-                    placeholder={props.title}
+                    value={taskDescription}
+                    placeholder={props.description}
+                    onChange={(event) => {
+                      setTaskDescription(event.target.value);
+                    }}
                   />
                   <button
                     type='button'
                     className='w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700'
+                    onClick={() =>
+                      updateTodo(user, taskTitle, taskDescription, props.id)
+                    }
                   >
                     タスクを更新する
                   </button>

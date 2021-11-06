@@ -22,7 +22,8 @@ interface TaskInputFormProps {
 const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
   const [isOpen, setOpen] = useState(false);
   const [newTaskText, setNewTaskText] = useState('');
-  const { todos, addTodo } = useTodos();
+  const { addTodo } = useTodos();
+  // const { todos, addTodo } = useTodos();
 
   /**
    * ファームのタスク追加ボタンのhandler
@@ -31,11 +32,6 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
     setNewTaskText('');
     addTodo(props.user, newTaskText);
   };
-
-  // eslint-disable-next-line no-console
-  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-  // eslint-disable-next-line no-console
-  console.log(todos);
 
   if (isOpen) {
     return (

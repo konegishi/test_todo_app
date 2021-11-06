@@ -10,6 +10,8 @@ export interface TaskProps {
   title: string;
   /** タスクのid */
   id: number;
+  /** タスクの説明 */
+  description: string;
 }
 
 /**
@@ -39,7 +41,12 @@ const Task: React.FC<TaskProps> = (props) => {
         />
       </div>
       {isOpen && (
-        <TaskModal title={props.title} id={props.id} onClickHandler={setOpen} />
+        <TaskModal
+          title={props.title}
+          id={props.id}
+          description={props.description}
+          onClickHandler={setOpen}
+        />
       )}
     </React.Fragment>
   );

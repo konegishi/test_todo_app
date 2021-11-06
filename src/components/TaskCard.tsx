@@ -7,7 +7,9 @@ import Task, { TaskProps } from './Task';
  */
 interface TaskCardProps {
   /** タスクのリスト */
-  tasks: TaskProps[];
+  todos?: [];
+  hoge: number;
+  tasks?: TaskProps[];
 }
 
 /**
@@ -17,12 +19,20 @@ interface TaskCardProps {
  * @param props TaskCardのProps
  * @returns TaskCardコンポーネント
  */
-const TaskCard: React.FC<TaskCardProps> = () => {
+const TaskCard: React.FC<TaskCardProps> = (props) => {
+  // const { fetchTodos } = useTodos();
   const { todos, fetchTodos } = useTodos();
+
+  // eslint-disable-next-line no-console
+  console.log('TaskCard: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+  // eslint-disable-next-line no-console
+  console.log(todos);
+  // eslint-disable-next-line no-console
+  console.count();
 
   useEffect(() => {
     fetchTodos();
-  });
+  }, [props.hoge]);
 
   return (
     <React.Fragment>
@@ -32,7 +42,14 @@ const TaskCard: React.FC<TaskCardProps> = () => {
             今日
           </h2>
           {todos.map((todo) => {
-            return <Task title={todo.task} id={todo.id} key={todo.id} />;
+            return (
+              <Task
+                title={todo.task}
+                id={todo.id}
+                description={todo.description}
+                key={todo.id}
+              />
+            );
           })}
         </div>
       </div>

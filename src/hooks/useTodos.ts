@@ -44,6 +44,20 @@ export const useTodos = () => {
     }
   };
 
+  const updateTodo = async (
+    user: User,
+    title: string,
+    description: string,
+    id: number
+  ) => {
+    const { data: todo } = await supabase
+      .from('todos')
+      .update({ task: title, description: description })
+      .match({ id: id })
+      .single();
+    setTodos(todo);
+  };
+
   /**
    * supabaseからtodoを削除する
    * @param id
@@ -51,7 +65,7 @@ export const useTodos = () => {
   const deleteTodo = async (id: number) => {
     try {
       await supabase.from('todos').delete().eq('id', id);
-      setTodos(todos.filter((x) => x.id != id));
+      setTodos(todos.filter((todo) => todo.id != id));
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log('error', error);
@@ -62,6 +76,7 @@ export const useTodos = () => {
     todos,
     fetchTodos,
     addTodo,
+    updateTodo,
     deleteTodo,
   };
 };
