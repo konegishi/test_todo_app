@@ -30,7 +30,7 @@ const Task: React.FC<TaskProps> = (props) => {
           type='checkbox'
           className='h-5 w-5 form-checkbox rounded-full mx-2 border-gray-300 focus:border-indigo-300 focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50 text-indigo-500'
         />
-        <span className='text-xl text-blueGray-700 ml-2 truncate'>
+        <span className='text-lg text-blueGray-700 ml-2 truncate'>
           {props.title}
         </span>
         <button
@@ -38,7 +38,9 @@ const Task: React.FC<TaskProps> = (props) => {
           onClick={() => setOpen(!isOpen)}
         />
       </div>
-      {isOpen && <TaskModal title={props.title} onClickHandler={setOpen} />}
+      {isOpen && (
+        <TaskModal title={props.title} id={props.id} onClickHandler={setOpen} />
+      )}
     </React.Fragment>
   );
 };
