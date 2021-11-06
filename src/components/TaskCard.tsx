@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useTodos } from '../hooks/useTodos';
 import Task, { TaskProps } from './Task';
 
 /**
@@ -16,7 +17,13 @@ interface TaskCardProps {
  * @param props TaskCardのProps
  * @returns TaskCardコンポーネント
  */
-const TaskCard: React.FC<TaskCardProps> = (props) => {
+const TaskCard: React.FC<TaskCardProps> = () => {
+  const { todos, fetchTodos } = useTodos();
+
+  useEffect(() => {
+    fetchTodos();
+  });
+
   return (
     <React.Fragment>
       <div className='flex-grow pt-4 px-4'>
@@ -24,8 +31,8 @@ const TaskCard: React.FC<TaskCardProps> = (props) => {
           <h2 className='ml-2 mb-2 font-semibold text-2xl text-blueGray-700'>
             今日
           </h2>
-          {props.tasks.map((task, index) => {
-            return <Task name={task.name} key={index} />;
+          {todos.map((todo) => {
+            return <Task name={todo.task} key={todo.id} />;
           })}
         </div>
       </div>
