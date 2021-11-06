@@ -40,12 +40,19 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
   if (isOpen) {
     return (
       <React.Fragment>
+        {/* blackOverlay */}
+        <div className='absolute w-full min-h-full'>
+          <span
+            id='blackOverlay'
+            className='absolute w-full min-h-full bg-black opacity-30'
+          ></span>
+        </div>
+        {/* タスク入力フォーム */}
         <div
           className={`shadow absolute bottom-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded-t ${
             isOpen ? 'bg-white p-2 sticky' : 'hidden'
           }`}
         >
-          {/* Collapse Footer */}
           <div className='block mb-2'>
             <div className='flex flex-row items-center'>
               <div className='w-6/12'>
@@ -83,12 +90,6 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
               onClick={() => handleOnClickAddButton()}
             />
           </form>
-        </div>
-        <div className='absolute w-full min-h-full'>
-          <span
-            id='blackOverlay'
-            className='absolute w-full min-h-full bg-black opacity-30'
-          ></span>
         </div>
       </React.Fragment>
     );
