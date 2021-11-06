@@ -32,14 +32,9 @@ const Task: React.FC<TaskProps> = (props) => {
         />
         <span className='text-xl text-blueGray-700 ml-2'>{props.name}</span>
         <button
-          className='fas fa-chevron-right h-5 w-5 text-gray-400 ml-auto mr-2'
+          className='fas fa-ellipsis-v h-5 w-5 text-gray-400 ml-auto mr-2'
           onClick={() => setOpen(!isOpen)}
         />
-        {/* <i class="fas fa-chevron-right"></i> */}
-        {/* <button
-          className='far fa-trash-alt h-5 w-5 text-gray-500 ml-auto mr-2'
-          onClick={() => deleteTodo(props.id)}
-        /> */}
       </div>
       {isOpen && <TaskModal onClickHandler={setOpen} />}
     </React.Fragment>
