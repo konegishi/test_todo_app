@@ -24,6 +24,14 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
   const [newTaskText, setNewTaskText] = useState('');
   const { todos, addTodo } = useTodos();
 
+  /**
+   * ファームのタスク追加ボタンのhandler
+   */
+  const handleOnClickAddButton = () => {
+    setNewTaskText('');
+    addTodo(props.user, newTaskText);
+  };
+
   // eslint-disable-next-line no-console
   console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
   // eslint-disable-next-line no-console
@@ -69,7 +77,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
           <input
             className='appearance-none border rounded-l py-2 px-3 w-11/12 text-gray-700 border-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500'
             id='taskTitle'
-            // value={newTaskText}
+            value={newTaskText}
             type='text'
             placeholder='新しいタスクの名前'
             onChange={(event) => {
@@ -80,7 +88,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
           <button
             className='fas fa-arrow-circle-up flex-grow-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline'
             type='button'
-            onClick={() => addTodo(props.user, newTaskText)}
+            onClick={() => handleOnClickAddButton()}
           />
         </form>
       </div>
