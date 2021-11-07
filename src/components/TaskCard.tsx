@@ -31,7 +31,7 @@ const TaskCard: React.FC<TaskCardProps> = (props) => {
   return (
     <React.Fragment>
       <div className='flex-grow pt-4 px-4'>
-        <div className=' bg-white rounded mb-4 shadow-lg p-2'>
+        <div className=' bg-white rounded mb-4 shadow-lg pt-2 px-2'>
           <h2 className='ml-2 mb-2 font-semibold text-2xl text-blueGray-700'>
             今日
           </h2>
