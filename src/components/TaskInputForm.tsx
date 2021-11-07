@@ -45,8 +45,8 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
         </div>
         {/* タスク入力フォーム */}
         <div
-          className={`shadow absolute bottom-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded-t ${
-            isOpen ? 'bg-white p-2 sticky' : 'hidden'
+          className={`shadow absolute bottom-0 left-0 right-0 z-40 items-center flex-1 rounded-t bg-white p-2 sticky${
+            !isOpen && ' hidden'
           }`}
         >
           <div className='block mb-2'>
