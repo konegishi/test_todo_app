@@ -1,5 +1,5 @@
+import { User } from '@supabase/supabase-js';
 import React, { useState } from 'react';
-// import { useTodos } from '../hooks/useTodos';
 import TaskModal from './TaskModal';
 
 /**
@@ -12,6 +12,15 @@ export interface TaskProps {
   id: number;
   /** タスクの説明 */
   description: string;
+  /** DeleteボタンのHandler */
+  deleteTodoHandler: (id: number) => void;
+  /** UpdateボタンのHandler */
+  updateTodoHandler: (
+    user: User,
+    title: string,
+    description: string,
+    id: number
+  ) => void;
 }
 
 /**
@@ -23,7 +32,6 @@ export interface TaskProps {
  */
 const Task: React.FC<TaskProps> = (props) => {
   const [isOpen, setOpen] = useState(false);
-  // const { deleteTodo } = useTodos();
 
   return (
     <React.Fragment>
@@ -46,6 +54,8 @@ const Task: React.FC<TaskProps> = (props) => {
           id={props.id}
           description={props.description}
           onClickHandler={setOpen}
+          deleteTodoHandler={props.deleteTodoHandler}
+          updateTodoHandler={props.updateTodoHandler}
         />
       )}
     </React.Fragment>

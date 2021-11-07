@@ -1,3 +1,4 @@
+import { User } from '@supabase/supabase-js';
 import { Auth } from '@supabase/ui';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 // import { useTodos } from '../hooks/useTodos';
@@ -14,8 +15,15 @@ export interface TaskModalProps {
   description: string;
   /** Modal開閉用メソッド */
   onClickHandler: Dispatch<SetStateAction<boolean>>;
-  deleteTodoHandle: any;
-  updateTodoHandle: any;
+  /** DeleteボタンのHandler */
+  deleteTodoHandler: (id: number) => void;
+  /** UpdateボタンのHandler */
+  updateTodoHandler: (
+    user: User,
+    title: string,
+    description: string,
+    id: number
+  ) => void;
 }
 
 /**
@@ -29,7 +37,6 @@ const TaskModal: React.FC<TaskModalProps> = (props) => {
   const [enableDelete, setEnableDelete] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
-  //   const { deleteTodo, updateTodo } = useTodos();
   const { user } = Auth.useUser();
 
   return (
@@ -98,16 +105,15 @@ const TaskModal: React.FC<TaskModalProps> = (props) => {
                   <button
                     type='button'
                     className='w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700'
-                    onClick={
-                      () =>
-                        props.updateTodoHandle(
-                          user,
-                          taskTitle,
-                          taskDescription,
-                          props.id
-                        )
-                      //   updateTodo(user, taskTitle, taskDescription, props.id)
-                    }
+                    onClick={() => {
+                      props.updateTodoHandler(
+                        user,
+                        taskTitle,
+                        taskDescription,
+                        props.id
+                      );
+                      props.onClickHandler(false);
+                    }}
                   >
                     タスクを更新する
                   </button>
@@ -127,8 +133,7 @@ const TaskModal: React.FC<TaskModalProps> = (props) => {
                 type='button'
                 disabled={!enableDelete}
                 className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 disabled:bg-gray-500 disabled:line-through text-base font-medium text-white'
-                onClick={() => props.deleteTodoHandle(props.id)}
-                // onClick={() => deleteTodo(props.id)}
+                onClick={() => props.deleteTodoHandler(props.id)}
               >
                 削除を行う
               </button>

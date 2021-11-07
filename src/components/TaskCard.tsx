@@ -1,6 +1,6 @@
+import { User } from '@supabase/supabase-js';
 import React from 'react';
-// import { useTodos } from '../hooks/useTodos';
-import Task, { TaskProps } from './Task';
+import Task from './Task';
 
 /**
  * TaskCardのProps
@@ -12,8 +12,15 @@ interface TaskCardProps {
     id: number;
     description: string;
   }[];
-  hoge?: number;
-  tasks?: TaskProps[];
+  /** DeleteボタンのHandler */
+  deleteTodoHandler: (id: number) => void;
+  /** UpdateボタンのHandler */
+  updateTodoHandler: (
+    user: User,
+    title: string,
+    description: string,
+    id: number
+  ) => void;
 }
 
 /**
@@ -24,41 +31,12 @@ interface TaskCardProps {
  * @returns TaskCardコンポーネント
  */
 const TaskCard: React.FC<TaskCardProps> = (props) => {
-  // const { fetchTodos } = useTodos();
-  // const { todos, fetchTodos } = useTodos();
-  // const { todos } = useTodos();
-  // const { fuga } = useContext(FugaContext);
-
   // eslint-disable-next-line no-console
   console.log('TaskCard: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
   // eslint-disable-next-line no-console
   // console.log(todos);
   // eslint-disable-next-line no-console
   console.count();
-
-  // const hoge = useMemo(() => {
-  //   // eslint-disable-next-line no-console
-  //   console.log('memo: ====================================================');
-  //   // eslint-disable-next-line no-console
-  //   console.count();
-  //   return todos;
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchTodos();
-  // }, [hoge]);
-
-  // useEffect(() => {
-  //   fetchTodos();
-  // }, [props.todos]);
-
-  // useEffect(() => {
-  //   fetchTodos();
-  // }, [fuga]);
-
-  // useEffect(() => {
-  //   fetchTodos();
-  // }, []);
 
   return (
     <React.Fragment>
@@ -74,6 +52,8 @@ const TaskCard: React.FC<TaskCardProps> = (props) => {
                 id={todo.id}
                 description={todo.description}
                 key={todo.id}
+                deleteTodoHandler={props.deleteTodoHandler}
+                updateTodoHandler={props.updateTodoHandler}
               />
             );
           })}

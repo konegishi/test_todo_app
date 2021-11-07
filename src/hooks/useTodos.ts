@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { User } from '@supabase/supabase-js';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 
 // interface Todo {
@@ -18,27 +18,11 @@ export const useTodos = () => {
     'useState: 00000000000000000000000000000000000000000000000000000000'
   );
   console.log(todos);
-  //   const [todos, setTodos] = useState<Todo[]>([]);
   //   const [errorText, setError] = useState('');
 
   /**
    * supabaseからtodoデータをfetchする
    */
-  //   const fetchTodos = useCallback(async () => {
-  //     const { data: todos, error } = await supabase
-  //       .from('todos')
-  //       .select('*')
-  //       .order('id');
-  //     if (error) {
-  //       // eslint-disable-next-line no-console
-  //       console.log('error', error);
-  //       // eslint-disable-next-line no-console
-  //       console.log('errorText', errorText);
-  //     } else {
-  //       setTodos(todos);
-  //     }
-  //   }, []);
-
   useEffect(() => {
     const fetchTodos = async () => {
       const { data: todos } = await supabase
@@ -46,17 +30,6 @@ export const useTodos = () => {
         .select('*')
         .order('id');
       return todos;
-      //   if (error) {
-      //     // eslint-disable-next-line no-console
-      //     console.log('error', error);
-      //     // eslint-disable-next-line no-console
-      //     // console.log('errorText', errorText);
-      //   } else {
-      //     console.log(
-      //       'fetch'
-      //     );
-      //     setTodos(todos);
-      //   }
     };
 
     fetchTodos().then((todos) => {
@@ -64,21 +37,6 @@ export const useTodos = () => {
       setTodos(todos);
     });
   }, []);
-
-  //   const fetchTodos = async () => {
-  //     const { data: todos, error } = await supabase
-  //       .from('todos')
-  //       .select('*')
-  //       .order('id');
-  //     if (error) {
-  //       // eslint-disable-next-line no-console
-  //       console.log('error', error);
-  //       // eslint-disable-next-line no-console
-  //       console.log('errorText', errorText);
-  //     } else {
-  //       setTodos(todos);
-  //     }
-  //   };
 
   /**
    * supabaseにtodoデータを追加する
@@ -101,77 +59,62 @@ export const useTodos = () => {
       console.log('add');
       const newTodos = [...todos, newTodo];
       setTodos(newTodos);
-      //   setTodos((todos) => [...todos, newTodo]);
-      //   setTodos([...todos, newTodo]);
     });
   };
-  //   const addTodo = useCallback(async (user: User, taskText: string) => {
-  //     const task = taskText.trim();
-  //     if (task.length) {
-  //       const { data: todo, error } = await supabase
-  //         .from('todos')
-  //         .insert({ task, user_id: user.id })
-  //         .single();
-  //       if (error) {
-  //         setError(error.message);
-  //       } else {
-  //         console.log(
-  //           'before: ==========================================================='
-  //         );
-  //         console.log(todos);
-  //         console.log(todo);
-  //         setTodos([...todos, todo]);
-  //         console.log(
-  //           'after: ==========================================================='
-  //         );
-  //         console.log(todos);
-  //       }
-  //     }
-  //   }, []);
-  //   const addTodo = async (user: User, taskText: string) => {
-  //     const task = taskText.trim();
-  //     if (task.length) {
-  //       const { data: todo, error } = await supabase
-  //         .from('todos')
-  //         .insert({ task, user_id: user.id })
-  //         .single();
-  //       if (error) {
-  //         setError(error.message);
-  //       } else {
-  //         setTodos([...todos, todo]);
-  //       }
-  //     }
-  //   };
 
-  const updateTodo = useCallback(
-    async (user: User, title: string, description: string, id: number) => {
-      const { data: todo } = await supabase
-        .from('todos')
-        .update({ task: title, description: description })
-        .match({ id: id })
-        .single();
-      setTodos(todo);
-    },
-    []
-  );
+  const updateTodo0 = async (
+    user: User,
+    title: string,
+    description: string,
+    id: number
+  ) => {
+    const { data: todo } = await supabase
+      .from('todos')
+      .update({ task: title, description: description })
+      .match({ id: id })
+      .single();
+    const updatedTodos = [...todos];
+    const matchedId = updatedTodos.findIndex((todo) => todo.id === id);
+    if (matchedId !== -1) {
+      updatedTodos[matchedId] = todo;
+      return updatedTodos;
+    }
+  };
+  const updateTodo = (
+    user: User,
+    title: string,
+    description: string,
+    id: number
+  ) => {
+    updateTodo0(user, title, description, id).then((updatedTodos) => {
+      if (updatedTodos) {
+        setTodos(updatedTodos);
+      }
+    });
+  };
 
   /**
    * supabaseからtodoを削除する
    * @param id
    */
-  const deleteTodo = useCallback(async (id: number) => {
+  const deleteTodo0 = async (id: number) => {
     try {
       await supabase.from('todos').delete().eq('id', id);
-      setTodos(todos.filter((todo) => todo.id != id));
+      return todos.filter((todo) => todo.id != id);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log('error', error);
     }
-  }, []);
+  };
+
+  const deleteTodo = (id: number) => {
+    deleteTodo0(id).then((deletedTodos) => {
+      setTodos(deletedTodos);
+    });
+  };
 
   return {
     todos,
-    // fetchTodos,
     addTodo,
     updateTodo,
     deleteTodo,
