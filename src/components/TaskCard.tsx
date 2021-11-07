@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useTodos } from '../hooks/useTodos';
+import React from 'react';
+// import { useTodos } from '../hooks/useTodos';
 import Task, { TaskProps } from './Task';
 
 /**
@@ -7,8 +7,12 @@ import Task, { TaskProps } from './Task';
  */
 interface TaskCardProps {
   /** タスクのリスト */
-  todos?: [];
-  hoge: number;
+  todos: {
+    task: string;
+    id: number;
+    description: string;
+  }[];
+  hoge?: number;
   tasks?: TaskProps[];
 }
 
@@ -21,18 +25,40 @@ interface TaskCardProps {
  */
 const TaskCard: React.FC<TaskCardProps> = (props) => {
   // const { fetchTodos } = useTodos();
-  const { todos, fetchTodos } = useTodos();
+  // const { todos, fetchTodos } = useTodos();
+  // const { todos } = useTodos();
+  // const { fuga } = useContext(FugaContext);
 
   // eslint-disable-next-line no-console
   console.log('TaskCard: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
   // eslint-disable-next-line no-console
-  console.log(todos);
+  // console.log(todos);
   // eslint-disable-next-line no-console
   console.count();
 
-  useEffect(() => {
-    fetchTodos();
-  }, [props.hoge]);
+  // const hoge = useMemo(() => {
+  //   // eslint-disable-next-line no-console
+  //   console.log('memo: ====================================================');
+  //   // eslint-disable-next-line no-console
+  //   console.count();
+  //   return todos;
+  // }, []);
+
+  // useEffect(() => {
+  //   fetchTodos();
+  // }, [hoge]);
+
+  // useEffect(() => {
+  //   fetchTodos();
+  // }, [props.todos]);
+
+  // useEffect(() => {
+  //   fetchTodos();
+  // }, [fuga]);
+
+  // useEffect(() => {
+  //   fetchTodos();
+  // }, []);
 
   return (
     <React.Fragment>
@@ -41,7 +67,7 @@ const TaskCard: React.FC<TaskCardProps> = (props) => {
           <h2 className='ml-2 mb-2 font-semibold text-2xl text-blueGray-700'>
             今日
           </h2>
-          {todos.map((todo) => {
+          {props.todos.map((todo) => {
             return (
               <Task
                 title={todo.task}

@@ -1,11 +1,16 @@
 import { Auth } from '@supabase/ui';
 import Head from 'next/head';
+// import { useState } from 'react';
+// import { useEffect } from 'react';
 import TaskCard from '../components/TaskCard';
 import TaskInputForm from '../components/TaskInputForm';
+import { useTodos } from '../hooks/useTodos';
 import { supabase } from '../lib/supabase';
 
 const Home = (): JSX.Element => {
   const { user } = Auth.useUser();
+  // const [fuga, setFuga] = useState(0);
+  const { todos, addTodo } = useTodos();
 
   return (
     <div>
@@ -36,14 +41,8 @@ const Home = (): JSX.Element => {
           </Head>
 
           <main className='absolute bg-gray-100 flex flex-col min-h-full w-full'>
-            <TaskCard
-              tasks={[
-                { name: 'メール返信' },
-                { name: 'OSS申請' },
-                { name: 'SpringBootの環境構築' },
-              ]}
-            />
-            <TaskInputForm user={user} />
+            <TaskCard todos={todos} />
+            <TaskInputForm user={user} onClickHandler={addTodo} />
           </main>
         </div>
       )}
