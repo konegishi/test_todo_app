@@ -11,12 +11,16 @@ import { supabase } from '../lib/supabase';
 //   description: string;
 // }
 
+/**
+ * Todo処理用のカスタムフック
+ * @returns
+ */
 export const useTodos = () => {
   const [todos, setTodos] = useState([]);
   //   const [errorText, setError] = useState('');
 
   /**
-   * supabaseからtodoデータをfetchする
+   * supabaseからtodoデータをfetchし、todosにsetする
    */
   useEffect(() => {
     const fetchTodos = async () => {
@@ -48,6 +52,11 @@ export const useTodos = () => {
     }
   };
 
+  /**
+   * 新規todoを追加する
+   * @param user
+   * @param taskText
+   */
   const addTodo = (user: User, taskText: string) => {
     addTodoSupabase(user, taskText).then((newTodo) => {
       const newTodos = [...todos, newTodo];
@@ -55,6 +64,13 @@ export const useTodos = () => {
     });
   };
 
+  /**
+   * Supabaseのtodoを更新する
+   * @param title todoのタイトル
+   * @param description todoの説明
+   * @param id todoのid
+   * @returns
+   */
   const updateTodoSupabase = async (
     title: string,
     description: string,
@@ -72,6 +88,13 @@ export const useTodos = () => {
       return updatedTodos;
     }
   };
+
+  /**
+   * todoを更新する
+   * @param title
+   * @param description
+   * @param id
+   */
   const updateTodo = (title: string, description: string, id: number) => {
     updateTodoSupabase(title, description, id).then((updatedTodos) => {
       if (updatedTodos) {
@@ -94,6 +117,10 @@ export const useTodos = () => {
     }
   };
 
+  /**
+   * todoを削除する
+   * @param id
+   */
   const deleteTodo = (id: number) => {
     deleteTodoSupabase(id).then((deletedTodos) => {
       setTodos(deletedTodos);
