@@ -1,7 +1,4 @@
-import { User } from '@supabase/supabase-js';
-import { Auth } from '@supabase/ui';
 import React, { Dispatch, SetStateAction, useState } from 'react';
-// import { useTodos } from '../hooks/useTodos';
 
 /**
  * TaskModalのProps
@@ -18,12 +15,7 @@ export interface TaskModalProps {
   /** DeleteボタンのHandler */
   deleteTodoHandler: (id: number) => void;
   /** UpdateボタンのHandler */
-  updateTodoHandler: (
-    user: User,
-    title: string,
-    description: string,
-    id: number
-  ) => void;
+  updateTodoHandler: (title: string, description: string, id: number) => void;
 }
 
 /**
@@ -37,7 +29,6 @@ const TaskModal: React.FC<TaskModalProps> = (props) => {
   const [enableDelete, setEnableDelete] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
-  const { user } = Auth.useUser();
 
   return (
     <React.Fragment>
@@ -107,7 +98,6 @@ const TaskModal: React.FC<TaskModalProps> = (props) => {
                     className='w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700'
                     onClick={() => {
                       props.updateTodoHandler(
-                        user,
                         taskTitle,
                         taskDescription,
                         props.id

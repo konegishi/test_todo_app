@@ -11,12 +11,16 @@ import { supabase } from '../lib/supabase';
 //   description: string;
 // }
 
+/**
+ * Todo処理用のカスタムフック
+ * @returns
+ */
 export const useTodos = () => {
   const [todos, setTodos] = useState([]);
   //   const [errorText, setError] = useState('');
 
   /**
-   * supabaseからtodoデータをfetchする
+   * supabaseからtodoデータをfetchし、todosにsetする
    */
   useEffect(() => {
     const fetchTodos = async () => {
@@ -37,7 +41,7 @@ export const useTodos = () => {
    * @param user
    * @param taskText
    */
-  const addTodo0 = async (user: User, taskText: string) => {
+  const addTodoSupabase = async (user: User, taskText: string) => {
     const task = taskText.trim();
     if (task.length) {
       const { data: todo } = await supabase
@@ -48,15 +52,26 @@ export const useTodos = () => {
     }
   };
 
+  /**
+   * 新規todoを追加する
+   * @param user
+   * @param taskText
+   */
   const addTodo = (user: User, taskText: string) => {
-    addTodo0(user, taskText).then((newTodo) => {
+    addTodoSupabase(user, taskText).then((newTodo) => {
       const newTodos = [...todos, newTodo];
       setTodos(newTodos);
     });
   };
 
-  const updateTodo0 = async (
-    user: User,
+  /**
+   * Supabaseのtodoを更新する
+   * @param title todoのタイトル
+   * @param description todoの説明
+   * @param id todoのid
+   * @returns
+   */
+  const updateTodoSupabase = async (
     title: string,
     description: string,
     id: number
@@ -73,13 +88,40 @@ export const useTodos = () => {
       return updatedTodos;
     }
   };
-  const updateTodo = (
-    user: User,
-    title: string,
-    description: string,
+
+  /**
+   * todoを更新する
+   * @param title
+   * @param description
+   * @param id
+   */
+  const updateTodo = (title: string, description: string, id: number) => {
+    updateTodoSupabase(title, description, id).then((updatedTodos) => {
+      if (updatedTodos) {
+        setTodos(updatedTodos);
+      }
+    });
+  };
+
+  const updateCompleteFlagSupabase = async (
+    isComplete: boolean,
     id: number
   ) => {
-    updateTodo0(user, title, description, id).then((updatedTodos) => {
+    const { data: todo } = await supabase
+      .from('todos')
+      .update({ is_complete: isComplete })
+      .match({ id: id })
+      .single();
+    const updatedTodos = [...todos];
+    const matchedId = updatedTodos.findIndex((todo) => todo.id === id);
+    if (matchedId !== -1) {
+      updatedTodos[matchedId] = todo;
+      return updatedTodos;
+    }
+  };
+
+  const updateCompleteFlag = (isComplete: boolean, id: number) => {
+    updateCompleteFlagSupabase(isComplete, id).then((updatedTodos) => {
       if (updatedTodos) {
         setTodos(updatedTodos);
       }
@@ -90,7 +132,7 @@ export const useTodos = () => {
    * supabaseからtodoを削除する
    * @param id
    */
-  const deleteTodo0 = async (id: number) => {
+  const deleteTodoSupabase = async (id: number) => {
     try {
       await supabase.from('todos').delete().eq('id', id);
       return todos.filter((todo) => todo.id != id);
@@ -100,8 +142,12 @@ export const useTodos = () => {
     }
   };
 
+  /**
+   * todoを削除する
+   * @param id
+   */
   const deleteTodo = (id: number) => {
-    deleteTodo0(id).then((deletedTodos) => {
+    deleteTodoSupabase(id).then((deletedTodos) => {
       setTodos(deletedTodos);
     });
   };
@@ -110,6 +156,7 @@ export const useTodos = () => {
     todos,
     addTodo,
     updateTodo,
+    updateCompleteFlag,
     deleteTodo,
   };
 };
