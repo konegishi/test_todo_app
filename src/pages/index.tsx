@@ -7,7 +7,8 @@ import { supabase } from '../lib/supabase';
 
 const Home = (): JSX.Element => {
   const { user } = Auth.useUser();
-  const { todos, addTodo, deleteTodo, updateTodo } = useTodos();
+  const { todos, addTodo, deleteTodo, updateTodo, updateCompleteFlag } =
+    useTodos();
 
   return (
     <div>
@@ -42,6 +43,7 @@ const Home = (): JSX.Element => {
               todos={todos}
               deleteTodoHandler={deleteTodo}
               updateTodoHandler={updateTodo}
+              updateCompleteFlagHandler={updateCompleteFlag}
             />
             <TaskInputForm user={user} addTodoHandler={addTodo} />
           </main>

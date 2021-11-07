@@ -103,6 +103,31 @@ export const useTodos = () => {
     });
   };
 
+  const updateCompleteFlagSupabase = async (
+    isComplete: boolean,
+    id: number
+  ) => {
+    const { data: todo } = await supabase
+      .from('todos')
+      .update({ is_complete: isComplete })
+      .match({ id: id })
+      .single();
+    const updatedTodos = [...todos];
+    const matchedId = updatedTodos.findIndex((todo) => todo.id === id);
+    if (matchedId !== -1) {
+      updatedTodos[matchedId] = todo;
+      return updatedTodos;
+    }
+  };
+
+  const updateCompleteFlag = (isComplete: boolean, id: number) => {
+    updateCompleteFlagSupabase(isComplete, id).then((updatedTodos) => {
+      if (updatedTodos) {
+        setTodos(updatedTodos);
+      }
+    });
+  };
+
   /**
    * supabaseからtodoを削除する
    * @param id
@@ -131,6 +156,7 @@ export const useTodos = () => {
     todos,
     addTodo,
     updateTodo,
+    updateCompleteFlag,
     deleteTodo,
   };
 };
