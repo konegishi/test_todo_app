@@ -1,13 +1,26 @@
-import React, { useEffect } from 'react';
-import { useTodos } from '../hooks/useTodos';
-import Task, { TaskProps } from './Task';
+import { User } from '@supabase/supabase-js';
+import React from 'react';
+import Task from './Task';
 
 /**
  * TaskCardのProps
  */
 interface TaskCardProps {
   /** タスクのリスト */
-  tasks: TaskProps[];
+  todos: {
+    task: string;
+    id: number;
+    description: string;
+  }[];
+  /** DeleteボタンのHandler */
+  deleteTodoHandler: (id: number) => void;
+  /** UpdateボタンのHandler */
+  updateTodoHandler: (
+    user: User,
+    title: string,
+    description: string,
+    id: number
+  ) => void;
 }
 
 /**
@@ -17,13 +30,7 @@ interface TaskCardProps {
  * @param props TaskCardのProps
  * @returns TaskCardコンポーネント
  */
-const TaskCard: React.FC<TaskCardProps> = () => {
-  const { todos, fetchTodos } = useTodos();
-
-  useEffect(() => {
-    fetchTodos();
-  });
-
+const TaskCard: React.FC<TaskCardProps> = (props) => {
   return (
     <React.Fragment>
       <div className='flex-grow pt-4 px-4'>
@@ -31,8 +38,17 @@ const TaskCard: React.FC<TaskCardProps> = () => {
           <h2 className='ml-2 mb-2 font-semibold text-2xl text-blueGray-700'>
             今日
           </h2>
-          {todos.map((todo) => {
-            return <Task name={todo.task} key={todo.id} />;
+          {props.todos.map((todo) => {
+            return (
+              <Task
+                title={todo.task}
+                id={todo.id}
+                description={todo.description}
+                key={todo.id}
+                deleteTodoHandler={props.deleteTodoHandler}
+                updateTodoHandler={props.updateTodoHandler}
+              />
+            );
           })}
         </div>
       </div>

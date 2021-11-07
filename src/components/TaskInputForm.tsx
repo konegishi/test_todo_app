@@ -1,6 +1,5 @@
 import { User } from '@supabase/supabase-js';
-import React, { useState } from 'react';
-import { useTodos } from '../hooks/useTodos';
+import React, { useRef, useState } from 'react';
 
 /**
  * TaskInputFormのProps
@@ -10,6 +9,8 @@ interface TaskInputFormProps {
   user: User;
   /** タスク名 */
   name?: string;
+  /** AddボタンのHandler */
+  addTodoHandler: (user: User, taskText: string) => void;
 }
 
 /**
@@ -21,21 +22,16 @@ interface TaskInputFormProps {
  */
 const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
   const [isOpen, setOpen] = useState(false);
-  const [newTaskText, setNewTaskText] = useState('');
-  const { todos, addTodo } = useTodos();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   /**
    * ファームのタスク追加ボタンのhandler
    */
   const handleOnClickAddButton = () => {
-    setNewTaskText('');
-    addTodo(props.user, newTaskText);
+    props.addTodoHandler(props.user, inputRef.current.value);
+    inputRef.current.value = '';
+    setOpen(!isOpen);
   };
-
-  // eslint-disable-next-line no-console
-  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-  // eslint-disable-next-line no-console
-  console.log(todos);
 
   if (isOpen) {
     return (
@@ -44,7 +40,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
         <div className='absolute w-full min-h-full'>
           <span
             id='blackOverlay'
-            className='absolute w-full min-h-full bg-black opacity-30'
+            className='absolute w-full min-h-full bg-gray-500 bg-opacity-75'
           ></span>
         </div>
         {/* タスク入力フォーム */}
@@ -76,13 +72,9 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
             <input
               className='appearance-none border rounded-l py-2 px-3 w-11/12 text-gray-700 border-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500'
               id='taskTitle'
-              value={newTaskText}
+              ref={inputRef}
               type='text'
               placeholder='新しいタスクの名前'
-              onChange={(event) => {
-                // setError('');
-                setNewTaskText(event.target.value);
-              }}
             />
             <button
               className='fas fa-arrow-circle-up flex-grow-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline'
