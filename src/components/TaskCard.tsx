@@ -1,4 +1,3 @@
-import { User } from '@supabase/supabase-js';
 import React from 'react';
 import Task from './Task';
 
@@ -15,12 +14,7 @@ interface TaskCardProps {
   /** DeleteボタンのHandler */
   deleteTodoHandler: (id: number) => void;
   /** UpdateボタンのHandler */
-  updateTodoHandler: (
-    user: User,
-    title: string,
-    description: string,
-    id: number
-  ) => void;
+  updateTodoHandler: (title: string, description: string, id: number) => void;
 }
 
 /**

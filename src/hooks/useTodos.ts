@@ -37,7 +37,7 @@ export const useTodos = () => {
    * @param user
    * @param taskText
    */
-  const addTodo0 = async (user: User, taskText: string) => {
+  const addTodoSupabase = async (user: User, taskText: string) => {
     const task = taskText.trim();
     if (task.length) {
       const { data: todo } = await supabase
@@ -49,14 +49,13 @@ export const useTodos = () => {
   };
 
   const addTodo = (user: User, taskText: string) => {
-    addTodo0(user, taskText).then((newTodo) => {
+    addTodoSupabase(user, taskText).then((newTodo) => {
       const newTodos = [...todos, newTodo];
       setTodos(newTodos);
     });
   };
 
-  const updateTodo0 = async (
-    user: User,
+  const updateTodoSupabase = async (
     title: string,
     description: string,
     id: number
@@ -73,13 +72,8 @@ export const useTodos = () => {
       return updatedTodos;
     }
   };
-  const updateTodo = (
-    user: User,
-    title: string,
-    description: string,
-    id: number
-  ) => {
-    updateTodo0(user, title, description, id).then((updatedTodos) => {
+  const updateTodo = (title: string, description: string, id: number) => {
+    updateTodoSupabase(title, description, id).then((updatedTodos) => {
       if (updatedTodos) {
         setTodos(updatedTodos);
       }
@@ -90,7 +84,7 @@ export const useTodos = () => {
    * supabaseからtodoを削除する
    * @param id
    */
-  const deleteTodo0 = async (id: number) => {
+  const deleteTodoSupabase = async (id: number) => {
     try {
       await supabase.from('todos').delete().eq('id', id);
       return todos.filter((todo) => todo.id != id);
@@ -101,7 +95,7 @@ export const useTodos = () => {
   };
 
   const deleteTodo = (id: number) => {
-    deleteTodo0(id).then((deletedTodos) => {
+    deleteTodoSupabase(id).then((deletedTodos) => {
       setTodos(deletedTodos);
     });
   };

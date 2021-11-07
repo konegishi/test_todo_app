@@ -1,4 +1,3 @@
-import { User } from '@supabase/supabase-js';
 import React, { useState } from 'react';
 import TaskModal from './TaskModal';
 
@@ -15,12 +14,7 @@ export interface TaskProps {
   /** DeleteボタンのHandler */
   deleteTodoHandler: (id: number) => void;
   /** UpdateボタンのHandler */
-  updateTodoHandler: (
-    user: User,
-    title: string,
-    description: string,
-    id: number
-  ) => void;
+  updateTodoHandler: (title: string, description: string, id: number) => void;
 }
 
 /**
