@@ -31,13 +31,6 @@ interface TaskCardProps {
  * @returns TaskCardコンポーネント
  */
 const TaskCard: React.FC<TaskCardProps> = (props) => {
-  // eslint-disable-next-line no-console
-  console.log('TaskCard: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-  // eslint-disable-next-line no-console
-  // console.log(todos);
-  // eslint-disable-next-line no-console
-  console.count();
-
   return (
     <React.Fragment>
       <div className='flex-grow pt-4 px-4'>

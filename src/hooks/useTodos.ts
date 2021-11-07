@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { User } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
@@ -14,10 +13,6 @@ import { supabase } from '../lib/supabase';
 
 export const useTodos = () => {
   const [todos, setTodos] = useState([]);
-  console.log(
-    'useState: 00000000000000000000000000000000000000000000000000000000'
-  );
-  console.log(todos);
   //   const [errorText, setError] = useState('');
 
   /**
@@ -33,7 +28,6 @@ export const useTodos = () => {
     };
 
     fetchTodos().then((todos) => {
-      console.log('fetch');
       setTodos(todos);
     });
   }, []);
@@ -56,7 +50,6 @@ export const useTodos = () => {
 
   const addTodo = (user: User, taskText: string) => {
     addTodo0(user, taskText).then((newTodo) => {
-      console.log('add');
       const newTodos = [...todos, newTodo];
       setTodos(newTodos);
     });
