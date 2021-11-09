@@ -44,8 +44,10 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
       </div>
       {/* タスク入力フォーム */}
       <div
-        className={`shadow absolute bottom-0 left-0 right-0 z-40 items-center flex-1 rounded-t bg-white p-2 sticky${
-          !isOpen && ' hidden'
+        className={`${
+          !isOpen
+            ? 'hidden'
+            : 'shadow sticky bottom-0 left-0 right-0 z-40 items-center rounded-t bg-white p-2'
         }`}
       >
         <div className='block mb-2'>
@@ -69,14 +71,14 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
         {/* Form */}
         <form className='flex flex-row'>
           <input
-            className='appearance-none border rounded-l py-2 px-3 w-11/12 text-gray-700 border-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500'
+            className='rounded-l py-2 px-3 w-11/12 text-gray-700 border-gray-200 leading-tight'
             id='taskTitle'
             ref={inputRef}
             type='text'
             placeholder='新しいタスクの名前'
           />
           <button
-            className='fas fa-arrow-circle-up flex-grow-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline'
+            className='fas fa-arrow-circle-up flex-grow-0 bg-blue-500 text-white font-bold py-2 px-4 rounded-r'
             type='button'
             onClick={() => handleOnClickAddButton()}
           />
@@ -85,9 +87,10 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
     </React.Fragment>
   ) : (
     <React.Fragment>
-      <div className='flex justify-center shadow-2xl sticky bottom-0'>
+      {/* FAB */}
+      <div className='sticky mx-auto bottom-0'>
         <button
-          className='fas fa-plus rounded-full h-12 w-12 mb-2 bg-blue-500 text-white text-xl'
+          className='fas fa-plus mb-2 rounded-full h-12 w-12 bg-blue-500 text-white text-xl'
           type='button'
           onClick={() => setOpen(!isOpen)}
         />

@@ -5,7 +5,12 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      textColor: () => ({
+        'blueGray-100': '#f1f5f9',
+        'blueGray-800': '#1e293b',
+      }),
+    },
   },
   variants: {
     extend: {
