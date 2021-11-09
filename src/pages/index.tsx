@@ -24,16 +24,6 @@ const Home = (): JSX.Element => {
         </div>
       ) : (
         <div>
-          {/* <button
-            className='btn-black w-full mt-12'
-            onClick={async () => {
-              const { error } = await supabase.auth.signOut();
-              // eslint-disable-next-line no-console
-              if (error) console.log('Error logging out:', error.message);
-            }}
-          >
-            Logout
-          </button> */}
           <Head>
             <title>Create Next App</title>
             <link rel='icon' href='/favicon.ico' />
