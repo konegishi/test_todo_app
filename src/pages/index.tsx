@@ -31,7 +31,6 @@ const Home = (): JSX.Element => {
 
           <main className='absolute bg-gray-100 flex flex-col min-h-full w-full'>
             <NavBar />
-            <div className='flex-grow'></div>
             {todos && todos.length !== 0 && (
               <TaskCard
                 todos={todos}
@@ -40,6 +39,7 @@ const Home = (): JSX.Element => {
                 updateCompleteFlagHandler={updateCompleteFlag}
               />
             )}
+            <div className='flex-grow'></div>
             <TaskInputForm user={user} addTodoHandler={addTodo} />
           </main>
         </div>
