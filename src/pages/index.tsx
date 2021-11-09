@@ -39,12 +39,14 @@ const Home = (): JSX.Element => {
           </Head>
 
           <main className='absolute bg-gray-100 flex flex-col min-h-full w-full'>
-            <TaskCard
-              todos={todos}
-              deleteTodoHandler={deleteTodo}
-              updateTodoHandler={updateTodo}
-              updateCompleteFlagHandler={updateCompleteFlag}
-            />
+            {todos && todos.length !== 0 && (
+              <TaskCard
+                todos={todos}
+                deleteTodoHandler={deleteTodo}
+                updateTodoHandler={updateTodo}
+                updateCompleteFlagHandler={updateCompleteFlag}
+              />
+            )}
             <TaskInputForm user={user} addTodoHandler={addTodo} />
           </main>
         </div>
