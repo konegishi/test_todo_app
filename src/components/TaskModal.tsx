@@ -15,7 +15,14 @@ export interface TaskModalProps {
   /** DeleteボタンのHandler */
   deleteTodoHandler: (id: number) => void;
   /** UpdateボタンのHandler */
-  updateTodoHandler: (title: string, description: string, id: number) => void;
+  updateTodoHandler: (
+    id: number,
+    todo: {
+      task?: string;
+      description?: string;
+      isComplete?: boolean;
+    }
+  ) => Promise<void>;
 }
 
 /**
@@ -97,11 +104,10 @@ const TaskModal: React.FC<TaskModalProps> = (props) => {
                     type='button'
                     className='w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700'
                     onClick={() => {
-                      props.updateTodoHandler(
-                        taskTitle,
-                        taskDescription,
-                        props.id
-                      );
+                      props.updateTodoHandler(props.id, {
+                        task: taskTitle,
+                        description: taskDescription,
+                      });
                       props.onClickHandler(false);
                     }}
                   >

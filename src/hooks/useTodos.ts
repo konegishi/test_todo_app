@@ -3,12 +3,14 @@ import { supabase } from '../lib/supabase';
 import useSWR, { useSWRConfig } from 'swr';
 
 // interface Todo {
-//   /** タスク名 */
+//   /** todo名 */
 //   task: string;
-//   /** タスクのid */
+//   /** todoのid */
 //   id: number;
-//   /** タスクの説明 */
+//   /** 説明 */
 //   description: string;
+//   /** 完了フラグ */
+//   isComplete: boolean;
 // }
 
 /**
@@ -20,13 +22,6 @@ export const useTodos = () => {
   const fetcher = async () =>
     await supabase.from('todos').select('*').order('id');
   const { data, error } = useSWR('/todos', fetcher);
-
-  // eslint-disable-next-line no-console
-  console.log('swr: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-  // eslint-disable-next-line no-console
-  console.log(data);
-  // eslint-disable-next-line no-console
-  console.log(error);
 
   /**
    * supabaseにtodoデータを追加する
@@ -50,11 +45,15 @@ export const useTodos = () => {
    * @param id todoのid
    * @returns
    */
-  const updateTodo = async (title: string, description: string, id: number) => {
+  const updateTodo = async (
+    id: number,
+    todo: { task?: string; description?: string; isComplete?: boolean }
+  ) => {
     // titleとdescriptionの更新
     await supabase
       .from('todos')
-      .update({ task: title, description: description })
+      .update(todo)
+      //   .update({ task: title, description: description, isComplete: isComplete })
       .match({ id: id })
       .single();
     // refetch
@@ -67,7 +66,7 @@ export const useTodos = () => {
    * @param id todoのid
    */
   const updateCompleteFlag = async (isComplete: boolean, id: number) => {
-    // is_completeの更新
+    // isCompleteの更新
     await supabase
       .from('todos')
       .update({ isComplete: isComplete })

@@ -16,9 +16,14 @@ export interface TaskProps {
   /** DeleteボタンのHandler */
   deleteTodoHandler: (id: number) => void;
   /** UpdateボタンのHandler */
-  updateTodoHandler: (title: string, description: string, id: number) => void;
-  /** CompleteチェックボックスのHandler */
-  updateCompleteFlagHandler: (isComplete: boolean, id: number) => void;
+  updateTodoHandler: (
+    id: number,
+    todo: {
+      task?: string;
+      description?: string;
+      isComplete?: boolean;
+    }
+  ) => Promise<void>;
 }
 
 /**
@@ -38,7 +43,9 @@ const Task: React.FC<TaskProps> = (props) => {
           type='checkbox'
           className='h-5 w-5 form-checkbox rounded-full mx-2 border-gray-300 focus:ring-0 focus:ring-opacity-50 text-blue-500'
           onChange={() =>
-            props.updateCompleteFlagHandler(!props.isComplete, props.id)
+            props.updateTodoHandler(props.id, {
+              isComplete: !props.isComplete,
+            })
           }
           checked={props.isComplete}
         />

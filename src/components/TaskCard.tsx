@@ -11,14 +11,18 @@ interface TaskCardProps {
     id: number;
     description: string;
     isComplete: boolean;
-    // is_complete: boolean;
   }[];
   /** DeleteボタンのHandler */
   deleteTodoHandler: (id: number) => void;
   /** UpdateボタンのHandler */
-  updateTodoHandler: (title: string, description: string, id: number) => void;
-  /** CompleteチェックボックスのHandler */
-  updateCompleteFlagHandler: (isComplete: boolean, id: number) => void;
+  updateTodoHandler: (
+    id: number,
+    todo: {
+      task?: string;
+      description?: string;
+      isComplete?: boolean;
+    }
+  ) => Promise<void>;
 }
 
 /**
@@ -44,10 +48,8 @@ const TaskCard: React.FC<TaskCardProps> = (props) => {
                 description={todo.description}
                 key={todo.id}
                 isComplete={todo.isComplete}
-                // isComplete={todo.is_complete}
                 deleteTodoHandler={props.deleteTodoHandler}
                 updateTodoHandler={props.updateTodoHandler}
-                updateCompleteFlagHandler={props.updateCompleteFlagHandler}
               />
             );
           })}
