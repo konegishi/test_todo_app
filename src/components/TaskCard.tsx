@@ -10,7 +10,8 @@ interface TaskCardProps {
     task: string;
     id: number;
     description: string;
-    is_complete: boolean;
+    isComplete: boolean;
+    // is_complete: boolean;
   }[];
   /** DeleteボタンのHandler */
   deleteTodoHandler: (id: number) => void;
@@ -42,7 +43,8 @@ const TaskCard: React.FC<TaskCardProps> = (props) => {
                 id={todo.id}
                 description={todo.description}
                 key={todo.id}
-                isComplete={todo.is_complete}
+                isComplete={todo.isComplete}
+                // isComplete={todo.is_complete}
                 deleteTodoHandler={props.deleteTodoHandler}
                 updateTodoHandler={props.updateTodoHandler}
                 updateCompleteFlagHandler={props.updateCompleteFlagHandler}
