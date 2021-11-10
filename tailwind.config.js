@@ -10,6 +10,9 @@ module.exports = {
         'blueGray-100': '#f1f5f9',
         'blueGray-800': '#1e293b',
       }),
+      animation: () => ({
+        'spin-slow': 'spin 2s linear infinite',
+      })
     },
   },
   variants: {

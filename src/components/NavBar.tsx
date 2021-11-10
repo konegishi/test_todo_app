@@ -2,18 +2,11 @@ import React from 'react';
 import { supabase } from '../lib/supabase';
 
 /**
- * NavBarのProps
- */
-interface NavBarProps {
-  isTransparent?: boolean;
-}
-
-/**
  * 指標ごとのカードコンポーネント
  * @param props NavBarのProps
  * @returns NavBarコンポーネント
  */
-const NavBar: React.FC<NavBarProps> = () => {
+const NavBar: React.FC = () => {
   return (
     <React.Fragment>
       <nav className='bg-white shadow top-0 left-0 right-0'>

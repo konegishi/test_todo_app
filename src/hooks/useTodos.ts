@@ -50,29 +50,7 @@ export const useTodos = () => {
     todo: { task?: string; description?: string; isComplete?: boolean }
   ) => {
     // titleとdescriptionの更新
-    await supabase
-      .from('todos')
-      .update(todo)
-      //   .update({ task: title, description: description, isComplete: isComplete })
-      .match({ id: id })
-      .single();
-    // refetch
-    mutate('/todos');
-  };
-
-  /**
-   * Supabaseのtodoを更新する
-   * @param isComplete todoの完了フラグ
-   * @param id todoのid
-   */
-  const updateCompleteFlag = async (isComplete: boolean, id: number) => {
-    // isCompleteの更新
-    await supabase
-      .from('todos')
-      .update({ isComplete: isComplete })
-      //   .update({ is_complete: isComplete })
-      .match({ id: id })
-      .single();
+    await supabase.from('todos').update(todo).match({ id: id }).single();
     // refetch
     mutate('/todos');
   };
@@ -94,12 +72,10 @@ export const useTodos = () => {
 
   return {
     todos: data?.body,
-    // todos,
     // error,
     isLoading: !data && !error,
     addTodo,
     updateTodo,
-    updateCompleteFlag,
     deleteTodo,
   };
 };

@@ -24,7 +24,7 @@ const Home = (): JSX.Element => {
       ) : (
         <div>
           <Head>
-            <title>Create Next App</title>
+            <title>ToDo App</title>
             <link rel='icon' href='/favicon.ico' />
           </Head>
 
