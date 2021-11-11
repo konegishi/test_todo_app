@@ -17,7 +17,7 @@ const Home = (): JSX.Element => {
         <div className='absolute w-full h-full bg-gray-200'>
           <div className='flex content-center items-center justify-center h-full'>
             <div className='bg-white rounded shadow p-4 w-11/12'>
-              <h2 className='text-xl text-center border-b mb-4 pb-4'>
+              <h2 className='text-xl text-center border-b mb-4 pb-4 text-gray-800 font-bold'>
                 ToDo App
               </h2>
               <Auth
