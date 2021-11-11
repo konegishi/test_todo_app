@@ -17,11 +17,11 @@ import useSWR, { useSWRConfig } from 'swr';
  * Todo処理用のカスタムフック
  * @returns
  */
-export const useTodos = () => {
+export const useTodos = (user: User) => {
   const { mutate } = useSWRConfig();
   const fetcher = async () =>
     await supabase.from('todos').select('*').order('id');
-  const { data, error } = useSWR('/todos', fetcher);
+  const { data, error } = useSWR(user ? '/todos' : null, fetcher);
 
   /**
    * supabaseにtodoデータを追加する

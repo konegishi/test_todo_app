@@ -1,5 +1,6 @@
 import { Auth } from '@supabase/ui';
 import Head from 'next/head';
+import React from 'react';
 import NavBar from '../components/NavBar';
 import TaskCard from '../components/TaskCard';
 import TaskInputForm from '../components/TaskInputForm';
@@ -8,7 +9,7 @@ import { supabase } from '../lib/supabase';
 
 const Home = (): JSX.Element => {
   const { user } = Auth.useUser();
-  const { todos, addTodo, deleteTodo, updateTodo } = useTodos();
+  const { todos, addTodo, deleteTodo, updateTodo } = useTodos(user);
 
   return (
     <div>
