@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar matches snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="bg-white shadow top-0 left-0 right-0"
+  >
+    <div
+      class="container px-4 py-2 mx-auto"
+    >
+      <div
+        class="flex items-center justify-between"
+      >
+        <span>
+          ToDo Apps
+        </span>
+        <div
+          class="flex"
+        >
+          <button
+            class="fas fa-sign-out-alt h-5 w-5 ml-auto mr-2 text-gray-400"
+          />
+        </div>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
