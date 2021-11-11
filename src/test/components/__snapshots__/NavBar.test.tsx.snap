@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NavBar matches snapshot 1`] = `
+exports[`NavBar component matches snapshot 1`] = `
 <DocumentFragment>
   <nav
     class="bg-white shadow top-0 left-0 right-0"
