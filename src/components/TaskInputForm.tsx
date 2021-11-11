@@ -10,7 +10,7 @@ import { TaskInputFormProps } from '../types/taskinputform';
  */
 const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
   const [isOpen, setOpen] = useState(false);
-  const [hasValidCharNum, sethasValidCharNum] = useState(true);
+  const [hasValidCharNum, setHasValidCharNum] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
   /**
@@ -23,14 +23,11 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
     ) {
       props.addTodoHandler(props.user, inputRef.current.value);
       inputRef.current.value = '';
-      sethasValidCharNum(true);
+      setHasValidCharNum(true);
       setOpen(!isOpen);
     } else {
-      sethasValidCharNum(false);
+      setHasValidCharNum(false);
     }
-    // props.addTodoHandler(props.user, inputRef.current.value);
-    // inputRef.current.value = '';
-    // setOpen(!isOpen);
   };
 
   return isOpen ? (
