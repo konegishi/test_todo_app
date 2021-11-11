@@ -10,7 +10,7 @@ interface TaskInputFormProps {
   /** タスク名 */
   name?: string;
   /** AddボタンのHandler */
-  addTodoHandler: (user: User, taskText: string) => void;
+  addTodoHandler: (user: User, taskText: string) => Promise<void>;
 }
 
 /**

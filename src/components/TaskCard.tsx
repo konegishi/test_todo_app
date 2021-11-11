@@ -13,7 +13,7 @@ interface TaskCardProps {
     isComplete: boolean;
   }[];
   /** DeleteボタンのHandler */
-  deleteTodoHandler: (id: number) => void;
+  deleteTodoHandler: (id: number) => Promise<void>;
   /** UpdateボタンのHandler */
   updateTodoHandler: (
     id: number,

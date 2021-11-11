@@ -13,7 +13,7 @@ export interface TaskModalProps {
   /** Modal開閉用メソッド */
   onClickHandler: Dispatch<SetStateAction<boolean>>;
   /** DeleteボタンのHandler */
-  deleteTodoHandler: (id: number) => void;
+  deleteTodoHandler: (id: number) => Promise<void>;
   /** UpdateボタンのHandler */
   updateTodoHandler: (
     id: number,
