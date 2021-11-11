@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sticky mx-auto bottom-0"
+  >
+    <button
+      class="fas fa-plus mb-2 rounded-full h-12 w-12 bg-blue-500 text-white text-xl"
+      type="button"
+    />
+  </div>
+</DocumentFragment>
+`;
