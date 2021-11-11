@@ -1,29 +1,6 @@
 import React from 'react';
+import { TaskCardProps } from '../types/taskcard';
 import Task from './Task';
-
-/**
- * TaskCardのProps
- */
-interface TaskCardProps {
-  /** タスクのリスト */
-  todos: {
-    task: string;
-    id: number;
-    description: string;
-    isComplete: boolean;
-  }[];
-  /** DeleteボタンのHandler */
-  deleteTodoHandler: (id: number) => Promise<void>;
-  /** UpdateボタンのHandler */
-  updateTodoHandler: (
-    id: number,
-    todo: {
-      task?: string;
-      description?: string;
-      isComplete?: boolean;
-    }
-  ) => Promise<void>;
-}
 
 /**
  * TaskCardコンポーネント

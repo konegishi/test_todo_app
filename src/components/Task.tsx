@@ -1,30 +1,6 @@
 import React, { useState } from 'react';
+import { TaskProps } from '../types/task';
 import TaskModal from './TaskModal';
-
-/**
- * TaskのProps
- */
-export interface TaskProps {
-  /** タスク名 */
-  title: string;
-  /** タスクのid */
-  id: number;
-  /** タスクの説明 */
-  description: string;
-  /** タスクの完了フラグ */
-  isComplete: boolean;
-  /** DeleteボタンのHandler */
-  deleteTodoHandler: (id: number) => Promise<void>;
-  /** UpdateボタンのHandler */
-  updateTodoHandler: (
-    id: number,
-    todo: {
-      task?: string;
-      description?: string;
-      isComplete?: boolean;
-    }
-  ) => Promise<void>;
-}
 
 /**
  * Taskコンポーネント

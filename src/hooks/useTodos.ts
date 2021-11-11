@@ -1,24 +1,15 @@
 import { PostgrestResponse, User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import useSWR, { useSWRConfig } from 'swr';
-
-interface Todo {
-  /** todo名 */
-  task: string;
-  /** todoのid */
-  id: number;
-  /** 説明 */
-  description: string;
-  /** 完了フラグ */
-  isComplete: boolean;
-}
+import { Todo, UseTodos } from '../types/todos';
 
 /**
  * Todo処理用のカスタムフック
  * @returns
  */
-export const useTodos = (user: User) => {
+export const useTodos = (user: User): UseTodos => {
   const { mutate } = useSWRConfig();
+
   const fetcher = async () =>
     await supabase.from('todos').select('*').order('id');
   const { data, error } = useSWR<PostgrestResponse<Todo>, any>(

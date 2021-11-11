@@ -1,17 +1,5 @@
-import { User } from '@supabase/supabase-js';
 import React, { useRef, useState } from 'react';
-
-/**
- * TaskInputFormのProps
- */
-interface TaskInputFormProps {
-  /** ユーザー情報 */
-  user: User;
-  /** タスク名 */
-  name?: string;
-  /** AddボタンのHandler */
-  addTodoHandler: (user: User, taskText: string) => Promise<void>;
-}
+import { TaskInputFormProps } from '../types/taskinputform';
 
 /**
  * TaskInputFormコンポーネント

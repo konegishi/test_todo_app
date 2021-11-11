@@ -1,29 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-
-/**
- * TaskModalのProps
- */
-export interface TaskModalProps {
-  /** タスク名 */
-  title: string;
-  /** タスクのid */
-  id: number;
-  /** タスクの説明 */
-  description: string;
-  /** Modal開閉用メソッド */
-  onClickHandler: Dispatch<SetStateAction<boolean>>;
-  /** DeleteボタンのHandler */
-  deleteTodoHandler: (id: number) => Promise<void>;
-  /** UpdateボタンのHandler */
-  updateTodoHandler: (
-    id: number,
-    todo: {
-      task?: string;
-      description?: string;
-      isComplete?: boolean;
-    }
-  ) => Promise<void>;
-}
+import React, { useState } from 'react';
+import { TaskModalProps } from '../types/taskmodal';
 
 /**
  * TaskModalコンポーネント
