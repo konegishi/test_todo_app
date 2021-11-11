@@ -9,7 +9,7 @@ import { supabase } from '../lib/supabase';
 
 const Home = (): JSX.Element => {
   const { user } = Auth.useUser();
-  const { todos, addTodo, deleteTodo, updateTodo } = useTodos(user);
+  const { todos, isLoading, addTodo, deleteTodo, updateTodo } = useTodos(user);
 
   return (
     <div>
@@ -31,14 +31,25 @@ const Home = (): JSX.Element => {
 
           <main className='absolute bg-gray-100 flex flex-col min-h-full w-full'>
             <NavBar />
-            {todos && todos.length !== 0 && (
-              <TaskCard
-                todos={todos}
-                deleteTodoHandler={deleteTodo}
-                updateTodoHandler={updateTodo}
-              />
+            {isLoading ? (
+              <i className='fas fa-circle-notch animate-spin-slow m-auto text-4xl text-blue-500' />
+            ) : todos && todos.length !== 0 ? (
+              <div>
+                <TaskCard
+                  todos={todos}
+                  deleteTodoHandler={deleteTodo}
+                  updateTodoHandler={updateTodo}
+                />
+              </div>
+            ) : (
+              <div className='flex flex-col my-auto'>
+                <i className='fas fa-tasks text-6xl text-gray-400 mx-auto mb-4' />
+                <span className='mx-auto text-gray-500 text-lg text-center'>
+                  新しいタスクを追加してみましょう！
+                </span>
+              </div>
             )}
-            <div className='flex-grow'></div>
+            {todos && todos.length !== 0 && <div className='flex-grow'></div>}
             <TaskInputForm user={user} addTodoHandler={addTodo} />
           </main>
         </div>
