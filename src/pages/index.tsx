@@ -14,19 +14,25 @@ const Home = (): JSX.Element => {
   return (
     <div>
       {!user ? (
-        <div className='w-full h-full flex justify-center items-center p-4'>
-          <Auth
-            supabaseClient={supabase}
-            providers={['google', 'github']}
-            socialLayout='horizontal'
-            socialButtonSize='xlarge'
-          />
+        <div className='absolute w-full h-full bg-gray-200'>
+          <div className='flex content-center items-center justify-center h-full'>
+            <div className='bg-white rounded shadow p-4 w-11/12'>
+              <h2 className='text-xl text-center border-b mb-4 pb-4'>
+                ToDo App
+              </h2>
+              <Auth
+                supabaseClient={supabase}
+                providers={['google', 'github']}
+                socialLayout='horizontal'
+                socialButtonSize='xlarge'
+              />
+            </div>
+          </div>
         </div>
       ) : (
         <div>
           <Head>
             <title>ToDo App</title>
-            <link rel='icon' href='/favicon.ico' />
           </Head>
 
           <main className='absolute bg-gray-100 flex flex-col min-h-full w-full'>
