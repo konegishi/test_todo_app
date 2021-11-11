@@ -10,15 +10,24 @@ import { TaskInputFormProps } from '../types/taskinputform';
  */
 const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
   const [isOpen, setOpen] = useState(false);
+  const [hasValidCharNum, setHasValidCharNum] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
   /**
    * ファームのタスク追加ボタンのhandler
    */
   const handleOnClickAddButton = () => {
-    props.addTodoHandler(props.user, inputRef.current.value);
-    inputRef.current.value = '';
-    setOpen(!isOpen);
+    if (
+      inputRef.current.value.length >= 3 &&
+      inputRef.current.value.length <= 100
+    ) {
+      props.addTodoHandler(props.user, inputRef.current.value);
+      inputRef.current.value = '';
+      setHasValidCharNum(true);
+      setOpen(!isOpen);
+    } else {
+      setHasValidCharNum(false);
+    }
   };
 
   return isOpen ? (
@@ -41,7 +50,7 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
         <div className='block mb-2'>
           <div className='flex flex-row items-center'>
             <div className='w-6/12'>
-              <span className='text-left text-gray-700 mr-0 inline-block whitespace-nowrap text-sm font-bold px-0'>
+              <span className='text-left text-gray-700 mr-0 inline-block whitespace-nowrap text-sm font-bold px-0 ml-3'>
                 新しいタスクを入力してみましょう
               </span>
             </div>
@@ -71,6 +80,13 @@ const TaskInputForm: React.FC<TaskInputFormProps> = (props) => {
             onClick={() => handleOnClickAddButton()}
           />
         </form>
+        <span
+          className={`${
+            !hasValidCharNum ? 'text-red-500' : 'text-gray-400'
+          } text-sm ml-3`}
+        >
+          3文字以上100文字以下{!hasValidCharNum && 'で入力し直してください'}
+        </span>
       </div>
     </React.Fragment>
   ) : (
